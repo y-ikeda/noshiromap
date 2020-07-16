@@ -4,7 +4,7 @@
       全て
     </p>
     <div v-for="(cat, idx) in getcatlist()" :key="idx">   
-     <p class="menu-label" >
+     <p class="menu-label"  @click="setcategory(idx)">
       {{ idx }}
     </p>
     <ul class="menu-list" v-for="(subcat,subidx) in cat" :key="subidx">
@@ -31,6 +31,11 @@ export default {
     setallcategory(){
         this.$store.commit('marker/setsubcategory',"")
         this.$nuxt.$emit("ViewMapAll")
+    },
+    setcategory(category){
+        this.$store.commit('marker/setcategory',category)
+        let groupkey = category + "/"
+        this.$nuxt.$emit("ViewMap",groupkey)
     },
     setsubcategory(category,subcategory){
         this.$store.commit('marker/setsubcategory',subcategory)

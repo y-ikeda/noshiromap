@@ -6,6 +6,7 @@ console.log(sheet)
 */
 // 状態管理
 export const state = () => ({
+    category:"",
     subcategory:"",
     json: {
       marker:[]
@@ -14,21 +15,31 @@ export const state = () => ({
 
 // getters
 export const getters = {
+    getCategory(state){
+      return state.category
+    },
+    getSubcategory(state){
+      return state.subcategory
+    },
     getAll(state){
       return state.json.marker
     },
     getDATA (state) {
       let marker = {}
+      if(state.category){
+        return state.json.marker.filter(function(el){return el.subcategory == this},state.category)
+      }
       if(state.subcategory){
         return state.json.marker.filter(function(el){return el.subcategory == this},state.subcategory)
-      }else{
-        return state.json.marker
       }
+      return state.json.marker
      
     },
     getGroupKey(state){
+
       let lists = []
       let markers = state.json.marker;
+     
       for(let i in markers){
         let marker = markers[i]
         let groupkey = marker.category + "/" + marker.subcategory
@@ -36,6 +47,7 @@ export const getters = {
           lists.push(groupkey)
         }
       }
+
       return lists
     },
     getAllList(state){
@@ -50,7 +62,10 @@ export const getters = {
         if(marker.subcategory in lists[marker.category] == false){
           lists[marker.category][marker.subcategory] = []
         }
-        lists[marker.category][marker.subcategory].push(marker)
+        if(marker.view){
+          lists[marker.category][marker.subcategory].push(marker)
+        }
+       
       }
     
       return lists
@@ -63,6 +78,11 @@ export const getters = {
       state.json.marker = value
     },
     setsubcategory(state,value){
+      state.category = ""
       state.subcategory = value
+    },
+    setcategory(state,value){
+      state.category = value
+      state.subcategory = ""
     }
   }

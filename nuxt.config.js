@@ -22,13 +22,16 @@ export default {
       { hid: 'description', name: 'description', content: process.env.npm_package_description || '' }
     ],
     script:[
-      { src: 'https://unpkg.com/leaflet@1.4.0/dist/leaflet.js' }
+      { src: 'https://unpkg.com/leaflet@1.4.0/dist/leaflet.js' },
+      { src: '/materialicon/leaflet.icon-material.js' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       { rel: 'stylesheet', href: 'https://unpkg.com/leaflet@1.4.0/dist/leaflet.css' },
-      { rel: 'stylesheet', href: 'https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css' }
-    ]
+      { rel: 'stylesheet', href: 'https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css' },
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/icon?family=Material+Icons'},
+      { rel: 'stylesheet', href: '/materialicon/leaflet.icon-material.css'},
+    ],
   },
   /*
   ** Global CSS

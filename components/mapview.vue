@@ -36,12 +36,15 @@ export default {
       }
     },
     resetlayerview(newdata) {
-      let grouplist = this.$store.getters["marker/getGroupKey"];
+      let grouplist   = this.$store.getters["marker/getGroupKey"];
+      let category    = this.$store.getters["marker/getCategory"];
       for (let i in grouplist) {
-        this.layerview[grouplist[i]] = false;
-      }
-      if(newdata){
-        this.layerview[newdata] = true
+        if((category && grouplist[i].indexOf(category) != -1 )|| grouplist[i] == newdata){
+  
+          this.layerview[grouplist[i]] = true;
+        }else{
+          this.layerview[grouplist[i]] = false;
+        }
       }
     },
     alllayerview(){
@@ -67,12 +70,25 @@ export default {
         map.addLayer(layers[groupkey]);
         this.layerview[groupkey] = true;
       }
-
+      
+      if(markers[index].view && markers[index].lat && markers[index].lng ){
+      let icon        = markers[index].iconname || 'place'
+      let iconColor   = markers[index].iconcolor || '#fff'
+      let markerColor = markers[index].iconbackgroundcolor || '#00f'
+  
+      var markericon = L.IconMaterial.icon({
+          icon: icon,            // Name of Material icon
+          iconColor: iconColor,              // Material icon color (could be rgba, hex, html name...)
+          markerColor: markerColor,  // Marker fill color
+          outlineColor: 'black',            // Marker outline color
+          outlineWidth: 1,                   // Marker outline width 
+        })
       var marker = L.marker([markers[index].lat, markers[index].lng], {
-        title: markers[index].name
+        title: markers[index].name,icon:markericon
       });
       marker.bindPopup(markers[index].name).openPopup();
       layers[groupkey].addLayer(marker);
+      }
     }
     this.map = map;
     this.markers = markers;
