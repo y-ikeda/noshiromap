@@ -32,6 +32,10 @@ export default {
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/icon?family=Material+Icons'},
       { rel: 'stylesheet', href: '/materialicon/leaflet.icon-material.css'},
     ],
+    htmlAttrs:{
+      class:'has-navbar-fixed-top'
+    }
+   
   },
   /*
   ** Global CSS

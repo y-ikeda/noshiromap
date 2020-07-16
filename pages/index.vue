@@ -1,21 +1,25 @@
 <template>
-  <div class="container">
-    <div class="inner_wrap is-flex">
-      <mapview></mapview>
+  <div class="main_wrap">
+    <headernav></headernav>
+    <main class="inner_wrap is-flex">
       <sidebar></sidebar>
-    </div>
+      <mapview></mapview>
+
+    </main>
 
   </div>
 </template>
 
 <script>
 import { mapMutations } from 'vuex'
+import headernav from '~/components/headerNavibar.vue' // コンポーネント読み込み
 import mapview from '~/components/mapview.vue' // コンポーネント読み込み
 import sidebar from '~/components/sidebar.vue' // コンポーネント読み込み
 export default {
     components: {
     mapview,
-    sidebar
+    sidebar,
+    headernav
   },
   async fetch ({ app, params  }) {
 
@@ -28,7 +32,7 @@ export default {
 </script>
 
 <style>
-.container {
+.main_wrap {
   margin: 0 auto;
   min-height: 100vh;
   display: flex;

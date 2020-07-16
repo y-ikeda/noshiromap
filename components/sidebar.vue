@@ -1,5 +1,5 @@
 <template>
-  <aside class="menu">
+  <aside class="menu" v-show="sideview">
     <p class="menu-label" @click="setallcategory()">
       全て
     </p>
@@ -16,7 +16,8 @@
 </template>
 <style>
 .menu {
-  width: 20%;
+  width: 300px;
+  max-width:80vw;
 }
 </style>
 <script>
@@ -44,6 +45,9 @@ export default {
     }
   },
   computed: {
+    sideview(){
+      return this.$store.state.menu.menubtn
+    },
     getall() {
       return this.$store.getters["marker/getAll"];
     }
