@@ -23,6 +23,7 @@ header.navbar.is-fixed-top {
 export default {
   methods: {
       togglebtn(){
+           this.$nuxt.$emit("Closeinformation")
           this.$store.commit('menu/menutoggle')
       }
   },

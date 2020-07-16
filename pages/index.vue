@@ -34,11 +34,9 @@ export default {
 <style>
 .main_wrap {
   margin: 0 auto;
-  min-height: 100vh;
+  height:calc(100vh - 3.25rem);
   display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+
 }
 .inner_wrap{
   width:100%

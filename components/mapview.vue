@@ -1,6 +1,7 @@
 <template>
   <div class="main_wrap">
     <div id="mapid" style="width: 100%;height: 100%;"></div>
+    <information></information>
   </div>
 </template>
 <style>
@@ -10,14 +11,20 @@
 }
 </style>
 <script>
+import information from '~/components/informationbox.vue' // コンポーネント読み込み
 export default {
+  
   data() {
     return {
+
       markers: {},
       map: {},
       markerlayer: {},
       layerview: {}
     };
+  },
+  components: {
+    information
   },
   methods: {
     setmaker(categorykey) {
@@ -51,6 +58,9 @@ export default {
       for (let i in grouplist) {
         this.layerview[grouplist[i]] = true;
       }
+    },
+    setinformation(marker){
+     this.$nuxt.$emit("Setinformation",marker)
     }
   },
   mounted: function() {
@@ -84,7 +94,7 @@ export default {
         })
       var marker = L.marker([markers[index].lat, markers[index].lng], {
         title: markers[index].name,icon:markericon
-      });
+      }).on( 'click', e =>  {this.setinformation(markers[index]);} );
       marker.bindPopup(markers[index].name).openPopup();
       layers[groupkey].addLayer(marker);
       }
