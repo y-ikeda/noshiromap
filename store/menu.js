@@ -3,6 +3,9 @@ export const state = () => ({
 })
 export const mutations = {
     menutoggle(state){
-      state.menubtn= !state.menubtn
+      state.menubtn = !state.menubtn
     },
+    menuclose(state){
+      state.menubtn = false
+    }
 }

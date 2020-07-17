@@ -1,6 +1,6 @@
 <template>
 <nav class="breadcrumb navbar-item" aria-label="breadcrumbs">
-  <ul class="has-text-white">
+  <ul class="">
     <li>{{category}}</li>
     <li v-if="subcategory">／{{subcategory}}</li>
   </ul>

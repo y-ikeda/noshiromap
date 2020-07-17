@@ -1,5 +1,6 @@
-import MarkerData from '~/assets/maeker.json'
 /*
+import MarkerData from '~/assets/maeker.json'
+
 
 const sheet = await this.$axios.$get('https://script.google.com/macros/s/AKfycby04vOn0hqNRcJCb5K9k6rkWzAnCb5F6yKHit5LUH9q6bSYXtE/exec')
 console.log(sheet)

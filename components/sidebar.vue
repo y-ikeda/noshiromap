@@ -59,21 +59,24 @@ export default {
     },
     getsubcatlist(category) {},
     setallcategory() {
-      this.$store.commit("marker/setsubcategory", "");
-      this.$nuxt.$emit("ViewMapAll");
+      this.$store.commit("marker/setsubcategory", "")
+      this.$store.commit("view/changeview", "mapview")
+      this.$nuxt.$emit("ViewMapAll")
     },
     setcategory(category) {
-      this.$store.commit("marker/setcategory", category);
-      let groupkey = category + "/";
-      this.$nuxt.$emit("ViewMap", groupkey);
+      this.$store.commit("marker/setcategory", category)
+      this.$store.commit("view/changeview", "mapview")
+      let groupkey = category + "/"
+      this.$nuxt.$emit("ViewMap", groupkey)
     },
     setsubcategory(category, subcategory) {
       this.$store.commit("marker/setsubcategory", {
         category: category,
         subcategory: subcategory
-      });
-      let groupkey = category + "/" + subcategory;
-      this.$nuxt.$emit("ViewMap", groupkey);
+      })
+      this.$store.commit("view/changeview", "mapview")
+      let groupkey = category + "/" + subcategory
+      this.$nuxt.$emit("ViewMap", groupkey)
     },
     showsubcategory(category) {
       return category == this.$store.state.marker.category;

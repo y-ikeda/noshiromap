@@ -1,9 +1,10 @@
 <template>
   <div class="main_wrap">
+    <headertitle></headertitle>
     <headernav></headernav>
     <main class="inner_wrap is-flex">
       <sidebar></sidebar>
-    <mapview></mapview>
+      <mapview v-show="viewmode == 'mapview'"></mapview>
     </main>
 
   </div>
@@ -11,14 +12,19 @@
 
 <script>
 import { mapMutations } from 'vuex'
-import headernav from '~/components/headerNavibar.vue' // コンポーネント読み込み
-import mapview from '~/components/mapview.vue' // コンポーネント読み込み
-import sidebar from '~/components/sidebar.vue' // コンポーネント読み込み
+import headertitle from '~/components/headertitle.vue' // コンポーネント読み込み
+import headernav   from '~/components/headerNavibar.vue' // コンポーネント読み込み
+import mapview     from '~/components/mapview.vue' // コンポーネント読み込み
+import sidebar     from '~/components/sidebar.vue' // コンポーネント読み込み
 export default {
     components: {
     mapview,
     sidebar,
+    headertitle,
     headernav
+  },
+  computed:{
+    viewmode(){return this.$store.state.view.viewmode;}
   },
   async fetch ({ app, params  }) {
 
