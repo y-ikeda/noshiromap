@@ -3,8 +3,7 @@
     <headernav></headernav>
     <main class="inner_wrap is-flex">
       <sidebar></sidebar>
-      <mapview></mapview>
-
+    <mapview></mapview>
     </main>
 
   </div>
@@ -34,12 +33,16 @@ export default {
 <style>
 .main_wrap {
   margin: 0 auto;
-  height:calc(100vh - 3.25rem);
+  height:100vh;
   display: flex;
+  flex-flow:column nowrap;
 
 }
 .inner_wrap{
-  width:100%
+  position:relative;
+  width:100%;
+  height: 100%;
+  flex-flow:column nowrap;
 }
 
 .title {

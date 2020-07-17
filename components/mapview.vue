@@ -1,12 +1,12 @@
 <template>
-  <div class="main_wrap">
+  <div class="map_wrap">
     <div id="mapid" style="width: 100%;height: 100%;"></div>
     <information></information>
   </div>
 </template>
 <style>
-.main_wrap {
-
+.map_wrap {
+  height:100%;
   flex-grow: 1;
 }
 </style>

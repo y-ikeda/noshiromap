@@ -1,5 +1,5 @@
 <template>
-  <header class="navbar is-fixed-top is-primary">
+  <header class="navbar is-primary topheader">
     <div class="navbar-brand">
         <span class="navbar-item material-icons" @click="togglebtn">
         {{menutext}}
@@ -10,15 +10,17 @@
     </div>
 
     <div class="navbar-end">
-        <span class="navbar-item">
+  
        <bureadcrumb></bureadcrumb>
        
     </div>
   </header>
 </template>
 <style>
-header.navbar.is-fixed-top {
+header.navbar.topheader {
+  width:100%;
   z-index: 5000;
+  padding-bottom:5px;
 }
 </style>
 <script>

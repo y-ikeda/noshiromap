@@ -33,7 +33,7 @@ export default {
       { rel: 'stylesheet', href: '/materialicon/leaflet.icon-material.css'},
     ],
     htmlAttrs:{
-      class:'has-navbar-fixed-top'
+      class:''
     }
    
   },
