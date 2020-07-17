@@ -5,6 +5,7 @@
     <main class="inner_wrap is-flex">
       <sidebar></sidebar>
       <mapview v-show="viewmode == 'mapview'"></mapview>
+      <shoplistview v-show="viewmode == 'shoplistview'"></shoplistview>
     </main>
 
   </div>
@@ -12,16 +13,18 @@
 
 <script>
 import { mapMutations } from 'vuex'
-import headertitle from '~/components/headertitle.vue' // コンポーネント読み込み
-import headernav   from '~/components/headerNavibar.vue' // コンポーネント読み込み
-import mapview     from '~/components/mapview.vue' // コンポーネント読み込み
-import sidebar     from '~/components/sidebar.vue' // コンポーネント読み込み
+import headertitle  from '~/components/headertitle.vue' // コンポーネント読み込み
+import headernav    from '~/components/headerNavibar.vue' // コンポーネント読み込み
+import mapview      from '~/components/mapview.vue' // コンポーネント読み込み
+import shoplistview from '~/components/shoplistview.vue' // コンポーネント読み込み
+import sidebar      from '~/components/sidebar.vue' // コンポーネント読み込み
 export default {
     components: {
     mapview,
     sidebar,
     headertitle,
-    headernav
+    headernav,
+    shoplistview
   },
   computed:{
     viewmode(){return this.$store.state.view.viewmode;}
