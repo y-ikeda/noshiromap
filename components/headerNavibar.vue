@@ -10,7 +10,9 @@
     </div>
 
     <div class="navbar-end">
-      
+        <span class="navbar-item">
+       <bureadcrumb></bureadcrumb>
+       
     </div>
   </header>
 </template>
@@ -20,7 +22,11 @@ header.navbar.is-fixed-top {
 }
 </style>
 <script>
+import bureadcrumb from '~/components/breadcrumb.vue' // コンポーネント読み込み
 export default {
+  components: {
+bureadcrumb
+  },
   methods: {
       togglebtn(){
            this.$nuxt.$emit("Closeinformation")
@@ -34,7 +40,8 @@ export default {
           }else{
               return "menu"
           }
-      }
+      },
+
   }
 };
 </script>

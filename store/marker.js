@@ -26,12 +26,14 @@ export const getters = {
     },
     getDATA (state) {
       let marker = {}
-      if(state.category){
-        return state.json.marker.filter(function(el){return el.subcategory == this},state.category)
-      }
+      console.log(state)
       if(state.subcategory){
         return state.json.marker.filter(function(el){return el.subcategory == this},state.subcategory)
       }
+      if(state.category){
+        return state.json.marker.filter(function(el){return el.subcategory == this},state.category)
+      }
+
       return state.json.marker
      
     },
@@ -78,8 +80,9 @@ export const getters = {
       state.json.marker = value
     },
     setsubcategory(state,value){
-      state.category = ""
-      state.subcategory = value
+      console.log(value)
+      state.category = value.category
+      state.subcategory = value.subcategory
     },
     setcategory(state,value){
       state.category = value

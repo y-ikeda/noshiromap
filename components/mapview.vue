@@ -42,10 +42,11 @@ export default {
       }
     },
     resetlayerview(newdata) {
-      let grouplist   = this.$store.getters["marker/getGroupKey"];
-      let category    = this.$store.getters["marker/getCategory"];
+      let grouplist      = this.$store.getters["marker/getGroupKey"];
+      let category       = this.$store.getters["marker/getCategory"];
+      let subcategory    = this.$store.getters["marker/getSubcategory"];
       for (let i in grouplist) {
-        if((category && grouplist[i].indexOf(category) != -1 )|| grouplist[i] == newdata){
+        if((category && grouplist[i].indexOf(category) != -1 && !subcategory)|| grouplist[i] == newdata){
   
           this.layerview[grouplist[i]] = true;
         }else{
@@ -106,6 +107,7 @@ export default {
   },
   created() {
     this.$nuxt.$on("ViewMap", data => {
+   
       this.resetlayerview(data);
       this.setmaker(data);
     });

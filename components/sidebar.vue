@@ -1,4 +1,5 @@
 <template>
+<transition name="slide">
   <aside class="menu" v-show="sideview">
     <p class="menu-label" @click="setallcategory()">
       全て
@@ -13,11 +14,24 @@
     </div>
 
   </aside>
+  </transition>
 </template>
 <style>
 .menu {
+  background-color:rgba(255,255,255);
   width: 300px;
-  max-width:80vw;
+  max-width:90vw;
+  position: fixed;
+  left:0;
+  height:100%;
+  z-index:10000;
+}
+.slide-enter-active, .slide-leave-active {
+  left:0;
+  transition: all .5s;
+}
+.slide-enter, .slide-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  left:-300px;
 }
 </style>
 <script>
@@ -39,7 +53,7 @@ export default {
         this.$nuxt.$emit("ViewMap",groupkey)
     },
     setsubcategory(category,subcategory){
-        this.$store.commit('marker/setsubcategory',subcategory)
+        this.$store.commit('marker/setsubcategory',{"category":category,"subcategory":subcategory})
         let groupkey = category + "/" + subcategory
         this.$nuxt.$emit("ViewMap",groupkey)
     }

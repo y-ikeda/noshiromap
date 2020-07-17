@@ -1,4 +1,5 @@
 <template>
+<transition name="fade">
 <div class="card" v-show="informationshow">
   <header class="card-header">
     <p class="card-header-title">
@@ -21,6 +22,7 @@
   </div>
 
 </div>
+</transition>
 </template>
 <style scoped>
 .card {
@@ -31,17 +33,18 @@
     max-width: 450px;
     bottom:0;
     right:0;
-    /*
-    width:350px;
-    max-width: 100%;
-    height:200px;
-    bottom:20px;
-    right: 20px;
-*/
+    background-color:rgba(255,255,255,0.9);
+
 }
 
 .info{
     font-size:90%;
+}
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
 }
 </style>
 <script>
