@@ -1,28 +1,31 @@
 <template>
-  <div class="shpplist_wrap container">
+  <div class="shpplist_wrap ">
     <article
-      class="panel is-primary "
+      class="panel is-primary container"
       v-for="(categoryes, categoryname) in getcatlist()"
       :key="categoryname"
     >
       <p class="panel-heading">
         {{ categoryname }}
       </p>
-      <div class="panel-block columns is-multiline">
+      <div class="panel-block"  v-for="(subcategoryes, subcategoryname) in categoryes"
+          :key="subcategoryname" >
         <article
-          class="panel is-link column is-full"
-          v-for="(subcategoryes, subcategoryname) in categoryes"
-          :key="subcategoryname"
+          class="panel is-link "
+          style="width:100%;"
         >
           <p class="panel-heading">
             {{ subcategoryname }}
           </p>
-          <a class="panel-block" v-for="(shop,shopindex) in subcategoryes" :key="shopindex">
+          <div class="columns panel-block is-full is-multiline">
+          <a class="column is-one-third is-full-mobile" v-for="(shop,shopindex) in subcategoryes" :key="shopindex">
             <span class="panel-icon">
               <i class="fas fa-book" aria-hidden="true"></i>
             </span>
             {{shop.name}}
           </a>
+            </div>
+
 
         </article>
       </div>
