@@ -65,7 +65,7 @@ export const getters = {
         if(marker.subcategory in lists[marker.category] == false){
           lists[marker.category][marker.subcategory] = []
         }
-        if(marker.view){
+        if(marker.view && marker.lat && marker.lng){
           lists[marker.category][marker.subcategory].push(marker)
         }
        

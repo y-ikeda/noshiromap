@@ -6,21 +6,20 @@
 </template>
 <style>
 .map_wrap {
-  height:100%;
+  height: 100%;
   flex-grow: 1;
 }
 </style>
 <script>
-import information from '~/components/informationbox.vue' // コンポーネント読み込み
+import information from "~/components/informationbox.vue"; // コンポーネント読み込み
 export default {
-  
   data() {
     return {
-
       markers: {},
       map: {},
       markerlayer: {},
-      layerview: {}
+      layerview: {},
+      markerdata:{}
     };
   },
   components: {
@@ -28,7 +27,6 @@ export default {
   },
   methods: {
     setmaker(categorykey) {
-
       let map = this.map;
       let layers = this.markerlayer;
       let grouplist = this.$store.getters["marker/getGroupKey"];
@@ -42,26 +40,28 @@ export default {
       }
     },
     resetlayerview(newdata) {
-      let grouplist      = this.$store.getters["marker/getGroupKey"];
-      let category       = this.$store.getters["marker/getCategory"];
-      let subcategory    = this.$store.getters["marker/getSubcategory"];
+      let grouplist = this.$store.getters["marker/getGroupKey"];
+      let category = this.$store.getters["marker/getCategory"];
+      let subcategory = this.$store.getters["marker/getSubcategory"];
       for (let i in grouplist) {
-        if((category && grouplist[i].indexOf(category) != -1 && !subcategory)|| grouplist[i] == newdata){
-  
+        if (
+          (category && grouplist[i].indexOf(category) != -1 && !subcategory) ||
+          grouplist[i] == newdata
+        ) {
           this.layerview[grouplist[i]] = true;
-        }else{
+        } else {
           this.layerview[grouplist[i]] = false;
         }
       }
     },
-    alllayerview(){
+    alllayerview() {
       let grouplist = this.$store.getters["marker/getGroupKey"];
       for (let i in grouplist) {
         this.layerview[grouplist[i]] = true;
       }
     },
-    setinformation(marker){
-     this.$nuxt.$emit("Setinformation",marker)
+    setinformation(marker) {
+      this.$nuxt.$emit("Setinformation", marker);
     }
   },
   mounted: function() {
@@ -80,24 +80,29 @@ export default {
         map.addLayer(layers[groupkey]);
         this.layerview[groupkey] = true;
       }
-      
-      if(markers[index].view && markers[index].lat && markers[index].lng ){
-      let icon        = markers[index].iconname || 'place'
-      let iconColor   = markers[index].iconcolor || '#fff'
-      let markerColor = markers[index].iconbackgroundcolor || '#00f'
-  
-      var markericon = L.IconMaterial.icon({
-          icon: icon,            // Name of Material icon
-          iconColor: iconColor,              // Material icon color (could be rgba, hex, html name...)
-          markerColor: markerColor,  // Marker fill color
-          outlineColor: 'black',            // Marker outline color
-          outlineWidth: 1,                   // Marker outline width 
-        })
-      var marker = L.marker([markers[index].lat, markers[index].lng], {
-        title: markers[index].name,icon:markericon
-      }).on( 'click', e =>  {this.setinformation(markers[index]);} );
-      marker.bindPopup(markers[index].name).openPopup();
-      layers[groupkey].addLayer(marker);
+
+      if (markers[index].view && markers[index].lat && markers[index].lng) {
+        let icon = markers[index].iconname || "place";
+        let iconColor = markers[index].iconcolor || "#fff";
+        let markerColor = markers[index].iconbackgroundcolor || "#00f";
+
+        var markericon = L.IconMaterial.icon({
+          icon: icon, // Name of Material icon
+          iconColor: iconColor, // Material icon color (could be rgba, hex, html name...)
+          markerColor: markerColor, // Marker fill color
+          outlineColor: "black", // Marker outline color
+          outlineWidth: 1 ,// Marker outline width
+          popupAnchor: [0, -32]      
+        });
+        var marker = L.marker([markers[index].lat, markers[index].lng], {
+          title: markers[index].name,
+          icon: markericon
+        }).on("click", e => {
+          this.setinformation(markers[index]);
+        });
+        this.markerdata[markers[index].name] = marker
+        marker.bindPopup(markers[index].name).openPopup();
+        layers[groupkey].addLayer(marker);
       }
     }
     this.map = map;
@@ -107,13 +112,20 @@ export default {
   },
   created() {
     this.$nuxt.$on("ViewMap", data => {
-   
       this.resetlayerview(data);
       this.setmaker(data);
     });
     this.$nuxt.$on("ViewMapAll", data => {
       this.alllayerview();
       this.setmaker();
+    });
+    this.$nuxt.$on("MapMove", data => {
+      this.alllayerview();
+      this.setinformation(data);
+      let zoom = data.zoom || 18;
+  
+      this.map.flyTo([data.lat, data.lng], zoom, { duration: 1 })
+      //this.markerdata[data.name].bindPopup(data.name).openPopup()
     });
   }
 };

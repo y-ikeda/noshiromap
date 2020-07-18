@@ -70,7 +70,7 @@ export default {
   created() {
     this.$nuxt.$on("Setinformation", data => {
       this.informationshow = true
-      console.log(data)
+
       this.informationdata.title       = data.name
       this.informationdata.category    = data.category
       this.informationdata.subcategory = data.subcategory

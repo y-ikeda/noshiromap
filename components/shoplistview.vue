@@ -18,7 +18,7 @@
             {{ subcategoryname }}
           </p>
           <div class="columns panel-block is-full is-multiline">
-          <a class="column is-one-third is-full-mobile" v-for="(shop,shopindex) in subcategoryes" :key="shopindex">
+          <a class="column is-one-third is-full-mobile" v-for="(shop,shopindex) in subcategoryes" :key="shopindex" @click="openmodal(shop)">
             <span class="panel-icon">
               <i class="fas fa-book" aria-hidden="true"></i>
             </span>
@@ -30,6 +30,7 @@
         </article>
       </div>
     </article>
+    <modal></modal>
   </div>
 </template>
 <style>
@@ -39,7 +40,11 @@
 }
 </style>
 <script>
+import modal from '~/components/modal.vue' // コンポーネント読み込み
 export default {
+   components: {
+    modal
+  },
   data() {
     return {
       markers: {},
@@ -52,6 +57,9 @@ export default {
   methods: {
     getcatlist() {
       return this.$store.getters["marker/getAllList"];
+    },
+    openmodal(shop){
+       this.$nuxt.$emit("OpenModal", shop)
     }
   }
 };
