@@ -35,7 +35,12 @@ export default {
     app.store.commit('marker/setjsondata',response)
 
 
+  },
+  mounted(){
+        let height=window.innerHeight;
+        document.documentElement.style.setProperty( '--vh', height/100 + 'px');
   }
+
 }
 </script>
 
@@ -43,6 +48,7 @@ export default {
 .main_wrap {
   margin: 0 auto;
   height:100vh;
+  height:calc( var(--vh) * 100 );
   display: flex;
   flex-flow:column nowrap;
 

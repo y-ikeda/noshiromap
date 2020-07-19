@@ -124,7 +124,7 @@ export default {
       this.setinformation(data);
       let zoom = data.zoom || 18;
   
-      this.map.flyTo([data.lat, data.lng], zoom, { duration: 1 })
+      this.map.flyTo([data.lat, data.lng], zoom, { duration: 1,animate:false })
       //this.markerdata[data.name].bindPopup(data.name).openPopup()
     });
   }
