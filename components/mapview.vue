@@ -38,6 +38,7 @@ export default {
           map.removeLayer(layers[grouplist[i]]);
         }
       }
+
     },
     resetlayerview(newdata) {
       let grouplist = this.$store.getters["marker/getGroupKey"];
@@ -61,7 +62,10 @@ export default {
       }
     },
     setinformation(marker) {
-      this.$nuxt.$emit("Setinformation", marker);
+      this.$nuxt.$emit("Setinformation", marker)
+    },
+    getpos(){
+      return this.map.getCenter()
     }
   },
   mounted: function() {
@@ -105,20 +109,22 @@ export default {
         layers[groupkey].addLayer(marker);
       }
     }
-    this.map = map;
-    this.markers = markers;
-    this.markerlayer = layers;
-    this.setmaker("");
+    this.map = map
+    this.markers = markers
+    this.markerlayer = layers
+
+    this.setmaker("")
   },
   created() {
     this.$nuxt.$on("ViewMap", data => {
       this.resetlayerview(data);
       this.setmaker(data);
-    });
+    })
     this.$nuxt.$on("ViewMapAll", data => {
       this.alllayerview();
       this.setmaker();
-    });
+    })
+    
     this.$nuxt.$on("MapMove", data => {
       this.alllayerview();
       this.setinformation(data);
@@ -126,7 +132,16 @@ export default {
   
       this.map.flyTo([data.lat, data.lng], zoom, { duration: 1,animate:false })
       //this.markerdata[data.name].bindPopup(data.name).openPopup()
-    });
+    })
+    this.$nuxt.$on("GetPos", data => {
+      if(this.map){
+      
+      let pos = this.map.getCenter()
+      this.$store.commit("map/setpos",pos)
+    
+      }
+
+    })
   }
 };
 </script>

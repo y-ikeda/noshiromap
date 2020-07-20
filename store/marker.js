@@ -8,6 +8,7 @@ console.log(sheet)
 // 状態管理
 export const state = () => ({
     category:"",
+    mapdata:{},
     subcategory:"",
     json: {
       marker:[]
@@ -81,12 +82,13 @@ export const getters = {
       state.json.marker = value
     },
     setsubcategory(state,value){
-      console.log(value)
+
       state.category = value.category
       state.subcategory = value.subcategory
     },
     setcategory(state,value){
       state.category = value
       state.subcategory = ""
-    }
+    },
+
   }

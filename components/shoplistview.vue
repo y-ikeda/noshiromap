@@ -1,5 +1,27 @@
 <template>
   <div class="shpplist_wrap ">
+    <article class="panel container">
+<p class="panel-heading">
+    絞り込み
+  </p>
+    <div class="panel-block">
+    <p class="control has-icons-left">
+      <input class="input" type="text" placeholder="Search">
+      <span class="material-icons icon is-left iconstyle">search</span>
+    </p>
+  </div>
+    <div class="panel-block">
+    <p class="control">
+  <button class="button is-link is-outlined" @click="getmappos">
+      地図から取得
+    </button>
+      <button class="button is-link is-outlined">
+      GPSから取得
+    </button>
+    <span v-if="get_lat && get_lng">緯度経度:{{get_lat}},{{get_lng}}</span>
+    </p>
+  </div>
+    </article>
     <article
       class="panel is-primary container"
       v-for="(categoryes, categoryname) in getcatlist()"
@@ -37,7 +59,13 @@
 .shpplist_wrap {
   height: 100%;
   flex-grow: 1;
+  margin-bottom:1rem;
 }
+.iconstyle{
+  width:40px!important;
+  height:40px!important;
+}
+
 </style>
 <script>
 import modal from '~/components/modal.vue' // コンポーネント読み込み
@@ -50,13 +78,28 @@ export default {
       markers: {},
       map: {},
       markerlayer: {},
-      layerview: {}
+      layerview: {},
+      lat:0,
+      lng:0,
     };
   },
+  computed:{
+    get_lat(){
+      return this.$store.state.map.lat
 
+    },
+    get_lng(){
+      return this.$store.state.map.lng
+    }
+  },
   methods: {
+    getmappos(){
+      this.$nuxt.$emit("GetPos")
+
+    },
     getcatlist() {
       return this.$store.getters["marker/getAllList"];
+ 
     },
     openmodal(shop){
        this.$nuxt.$emit("OpenModal", shop)

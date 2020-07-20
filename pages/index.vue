@@ -39,6 +39,7 @@ export default {
   mounted(){
         let height=window.innerHeight;
         document.documentElement.style.setProperty( '--vh', height/100 + 'px');
+        console.log(this.$nuxt)
   }
 
 }

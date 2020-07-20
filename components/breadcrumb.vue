@@ -12,7 +12,7 @@ export default {
   },
   computed:{
       category(){
-          return this.$store.getters["marker/getCategory"]||"全て"
+          return this.$store.getters["marker/getCategory"]||"全てのカテゴリー"
       },
       subcategory(){
           return this.$store.getters["marker/getSubcategory"]

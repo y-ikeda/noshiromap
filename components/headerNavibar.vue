@@ -2,6 +2,7 @@
   <section class="header-navibar-under level has-background-light">
     <div class="level-left">
       <breadcrumb></breadcrumb>
+ 
     </div>
     <div class="level-right">
       <div class="level-item tabs">
@@ -42,7 +43,8 @@ import bureadcrumb from "~/components/breadcrumb.vue"; // コンポーネント�
 
 export default {
   components: {
-    bureadcrumb
+    bureadcrumb,
+
   },
   methods: {
     activetab(tabname) {
