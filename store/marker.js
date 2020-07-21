@@ -8,6 +8,7 @@ console.log(sheet)
 // 状態管理
 export const state = () => ({
     category:"",
+    keyword:"",
     mapdata:{},
     subcategory:"",
     json: {
@@ -28,7 +29,7 @@ export const getters = {
     },
     getDATA (state) {
       let marker = {}
-      console.log(state)
+
       if(state.subcategory){
         return state.json.marker.filter(function(el){return el.subcategory == this},state.subcategory)
       }
@@ -56,7 +57,7 @@ export const getters = {
     },
     getAllList(state){
       let lists = {}
-      let markers = state.json.marker;
+      let markers = state.json.marker
       for(let i in markers){
         let marker = markers[i]
  
@@ -73,9 +74,14 @@ export const getters = {
       }
     
       return lists
+    },
+    getShopList(state){
+      return  state.json.marker
+
     }
 
   }
+  
 
   export const mutations = {
     setjsondata(state,value){
@@ -90,5 +96,7 @@ export const getters = {
       state.category = value
       state.subcategory = ""
     },
-
+    setkeyword(state,value){
+      state.keyword = value
+    }
   }
