@@ -6,6 +6,7 @@
       <sidebar></sidebar>
       <mapview v-show="viewmode == 'mapview'"></mapview>
       <shoplistview v-show="viewmode == 'shoplistview'"></shoplistview>
+      <nearshopview v-show="viewmode == 'nearshopview'"></nearshopview>
     </main>
 
   </div>
@@ -18,13 +19,15 @@ import headernav    from '~/components/headerNavibar.vue' // コンポーネン�
 import mapview      from '~/components/mapview.vue' // コンポーネント読み込み
 import shoplistview from '~/components/shoplistview.vue' // コンポーネント読み込み
 import sidebar      from '~/components/sidebar.vue' // コンポーネント読み込み
+import nearshopview from '~/components/nearshopview.vue' // コンポーネント読み込み
 export default {
     components: {
     mapview,
     sidebar,
     headertitle,
     headernav,
-    shoplistview
+    shoplistview,
+    nearshopview
   },
   computed:{
     viewmode(){return this.$store.state.view.viewmode;}

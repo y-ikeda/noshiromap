@@ -76,7 +76,7 @@ export const getters = {
       return lists
     },
     getShopList(state){
-      return  state.json.marker
+      return  state.json.marker.filter(function(el){return el.view && el.lat && el.lng})
 
     }
 

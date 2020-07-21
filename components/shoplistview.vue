@@ -99,17 +99,10 @@ export default {
     };
   },
   computed: {
-    get_lat() {
-      return this.$store.state.map.lat;
-    },
-    get_lng() {
-      return this.$store.state.map.lng;
-    }
+
   },
   methods: {
-    getmappos() {
-      this.$nuxt.$emit("GetPos");
-    },
+
     getcatlist() {
       let markers = this.$store.getters["marker/getShopList"];
       let lists = {};
