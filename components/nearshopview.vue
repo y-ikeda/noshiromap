@@ -36,9 +36,10 @@
 
     <article class="panel container">
       <p class="panel-heading">近くのお店一覧</p>
-      <div class="panel-block" v-for="(near, index) in nearlist" :key="index">
-        {{ near.name }} お店までの距離{{ near.distance }}km
-        <a @click="moveshop(near)">お店の地図を見る</a>
+      <div class="panel-block columns is-multiline" v-for="(near, index) in nearlist" :key="index">
+        <div class="column is-two-fifth is-full-mobile">{{ near.name }}</div>
+        <div class="column is-one-fifth is-full-mobile">お店までの距離{{ near.distance }}km</div>
+        <div class="column has-text-right has-text-centered-mobile"><a @click="moveshop(near)">お店の地図を見る</a></div>
       </div>
     </article>
   </div>
