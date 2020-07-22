@@ -102,13 +102,16 @@ export default {
           title: markers[index].name,
           icon: markericon
         }).on("click", e => {
-          this.setinformation(markers[index]);
+          this.setinformation(markers[index])
         });
         this.markerdata[markers[index].name] = marker
         marker.bindPopup(markers[index].name).openPopup();
         layers[groupkey].addLayer(marker);
       }
     }
+    map.on("click",e => {
+       this.$nuxt.$emit("Removeinformation")
+    })
     this.map = map
     this.markers = markers
     this.markerlayer = layers

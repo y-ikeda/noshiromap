@@ -77,6 +77,9 @@ export default {
       this.informationdata.address     = data.address
       this.informationdata.tel         = data.tel
     })
+    this.$nuxt.$on("Removeinformation", data => {
+      this.informationshow = false
+    })
     this.$nuxt.$on("Closeinformation", data => {
         this.close_information()
     })

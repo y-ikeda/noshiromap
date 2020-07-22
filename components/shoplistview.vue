@@ -18,24 +18,23 @@
           <span class="material-icons icon is-left iconstyle">search</span>
         </p>
       </div>
-
-      <!--
-    <div class="panel-block">
-    <p class="control">
-  <button class="button is-link is-outlined" @click="getmappos">
-      地図から取得
-    </button>
-      <button class="button is-link is-outlined">
-      GPSから取得
-    </button>
-    <span v-if="get_lat && get_lng">緯度経度:{{get_lat}},{{get_lng}}</span>
-    </p>
-  </div>
-  -->
+      <div class="panel-block">
+        <p class="control btn-group">
+          <a
+            class="button is-link is-outlined catbtn"
+            v-for="cat in grouplist"
+            :key="cat"
+            :href="'#' + cat"
+          >
+            {{ cat }}
+          </a>
+        </p>
+      </div>
     </article>
     <article
+      :id="categoryname"
       class="panel is-primary container"
-      v-for="(categoryes, categoryname) in getcatlist()"
+      v-for="(categoryes, categoryname) in shoplist"
       :key="categoryname"
     >
       <p class="panel-heading">
@@ -67,11 +66,16 @@
       </div>
     </article>
     <modal></modal>
+    <totop></totop>
   </div>
 </template>
-<style>
+<style scoped>
+.btn-group{
+  display:flex;
+  flex-flow:row wrap;
+}
 .shpplist_wrap {
-  padding-top:2rem;
+  padding-top: 2rem;
   height: 100%;
   flex-grow: 1;
   margin-bottom: 1rem;
@@ -80,12 +84,18 @@
   width: 40px !important;
   height: 40px !important;
 }
+.catbtn{
+  margin:2px;
+  flex-grow:1;
+}
 </style>
 <script>
 import modal from "~/components/modal.vue"; // コンポーネント読み込み
+import totop from "~/components/totop.vue"; // コンポーネント読み込み
 export default {
   components: {
-    modal
+    modal,
+    totop
   },
   data() {
     return {
@@ -99,10 +109,14 @@ export default {
     };
   },
   computed: {
-
+    grouplist() {
+      return Object.keys(this.getcatlist());
+    },
+    shoplist(){
+      return this.getcatlist()
+    }
   },
   methods: {
-
     getcatlist() {
       let markers = this.$store.getters["marker/getShopList"];
       let lists = {};
@@ -124,6 +138,7 @@ export default {
           lists[marker.category][marker.subcategory].push(marker);
         }
       }
+
       return lists;
     },
     openmodal(shop) {

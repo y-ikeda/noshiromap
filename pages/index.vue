@@ -1,5 +1,5 @@
 <template>
-  <div class="main_wrap">
+  <div class="main_wrap" :class="viewmode">
     <headertitle></headertitle>
     <headernav></headernav>
     <main class="inner_wrap is-flex">

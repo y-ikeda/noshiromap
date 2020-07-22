@@ -17,6 +17,9 @@
         <div class="column is-one-fifth is-full-mobile">
           <div class="select">
             <select v-model="distance">
+              <option value="0.1">100m以内の店舗</option>
+              <option value="0.3">300m以内の店舗</option>
+              <option value="0.5">500m以内の店舗</option>
               <option value="1">1km以内の店舗</option>
               <option value="2">2km以内の店舗</option>
               <option value="3">3km以内の店舗</option>
@@ -42,6 +45,7 @@
         <div class="column has-text-right has-text-centered-mobile"><a @click="moveshop(near)">お店の地図を見る</a></div>
       </div>
     </article>
+    <totop></totop>
   </div>
 </template>
 <style>
@@ -57,7 +61,12 @@
 }
 </style>
 <script>
+import totop from "~/components/totop.vue"; // コンポーネント読み込み
 export default {
+    components: {
+
+    totop
+  },
   data() {
     return {
       nearlist: [],

@@ -1,5 +1,5 @@
 <template>
-  <header class="navbar is-link topheader">
+  <header class="navbar is-link topheader"  id="top">
     <div class="navbar-brand">
       <span class="navbar-item material-icons" @click="togglebtn">
         {{ menutext }}
@@ -13,9 +13,13 @@
 <style>
     header.navbar.topheader {
     width: 100%;
-    z-index: 5000;
     padding-bottom: 5px;
     }
+    .mapview header.navbar.topheader {
+    z-index: 5000;
+ 
+    }
+</style>
 </style>
 <script>
 export default {
